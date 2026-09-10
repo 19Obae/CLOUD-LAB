@@ -3,6 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const app = express();
+app.use(cors());
+
 const PORT = 5000;
 
 app.use(cors());
@@ -23,4 +25,46 @@ app.get('/api/hello', (req, res) => {
 // Câu 21: Khởi chạy Server
 app.listen(PORT, () => {
     console.log(`Server đang chạy tại http://localhost:${PORT}`);
+});
+
+const Student = require('./models/student');
+
+// Câu 36: Lấy danh sách sinh viên
+app.get('/api/Students', async (req, res) => {
+    try {
+        const students = await Student.find();
+        res.json(students);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Câu 37: Thêm sinh viên
+app.post('/api/Students', async (req, res) => {
+    try {
+        const newStudent = await Student.create(req.body);
+        res.status(201).json(newStudent);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Câu 38: Cập nhật sinh viên
+app.put('/api/Students/:id', async (req, res) => {
+    try {
+        const updatedStudent = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json(updatedStudent);
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// Câu 39: Xóa sinh viên
+app.delete('/api/Students/:id', async (req, res) => {
+    try {
+        await Student.findByIdAndDelete(req.params.id);
+        res.json({ message: "Đã xóa sinh viên thành công" });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 });
