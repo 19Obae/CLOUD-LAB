@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  # CÂU 81 & 83: Khai báo Backend Service và cấu hình Port
+  backend:
+    build: ./mern-demo
+    container_name: mern-backend-compose
+    ports:
+      - "5000:5000"
+    # CÂU 85: Khai báo biến môi trường MongoDB
+    environment:
+      - MONGODB_URI=mongodb+srv://Khoa:1234@cluster0.ilcx6ar.mongodb.net/cloud-lab?appName=Cluster0
+
+  # CÂU 82 & 84: Khai báo Frontend Service và cấu hình Port
+  frontend:
+    build: ./client
+    container_name: mern-frontend-compose
+    ports:
+      - "5173:4173" # Ánh xạ ra 5173 nhưng bên trong Vite dùng 4173
+    depends_on:
+      - backend # Yêu cầu Backend chạy trước thì Frontend mới chạy

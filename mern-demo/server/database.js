@@ -15,7 +15,7 @@ mongoose.connect(process.env.MONGODB_URI)
     .catch((err) => console.error('Lỗi kết nối MongoDB:', err));
 
 app.get('/api/hello', (req, res) => {
-    res.json({ message: "Backend đang hoạt động ngon lành trên Linux Server!" });
+    res.json({ message: "Backend đang hoạt động trên Linux Server!" });
 });
 
 app.listen(PORT, () => {

@@ -11,7 +11,7 @@ app.use(cors());
 app.use(express.json());
 
 // Nhớ thay thế chuỗi URI dưới đây bằng chuỗi Connection String thật của em ở Câu 30 nhé!
-const URI = "mongodb+srv://Khoa:1234@cluster0.ilcx6ar.mongodb.net/?appName=Cluster0";
+const URI = "mongodb+srv://Khoa:1234@cluster0.ilcx6ar.mongodb.net/cloud-lab?appName=Cluster0";
 
 mongoose.connect(URI)
     .then(() => console.log('Đã kết nối thành công với MongoDB Atlas!'))
@@ -19,7 +19,7 @@ mongoose.connect(URI)
 
 // Câu 22: Tạo API GET /api/hello
 app.get('/api/hello', (req, res) => {
-    res.json({ message: "Backend đang hoạt động ngon lành trên Linux Server!" });
+    res.json({ message: "Backend đang hoạt động trên Linux Server!" });
 });
 
 // Câu 21: Khởi chạy Server
